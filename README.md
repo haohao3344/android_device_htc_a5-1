@@ -1,4 +1,4 @@
-Copyright 2014 - The CyanogenMod Project
+Copyright 2014 - The MoKee OpenSource Project
 
 Device configuration for HTC Desire 816("a5")
 =============================================
@@ -16,7 +16,4 @@ Battery | 2600 mAh
 Display | 5.5" 1280 x 720 px
 Primary Camera  | 13MPx, LED Flash
 Secondary Camera | 5MPx
-
-[**Device Wiki**](http://wiki.cyanogenmod.org/w/A5_Info)
-
-![HTC Desire 816](http://wiki.cyanogenmod.org/images/5/5e/816.png "HTC Desire 816") </center>
+</center>
