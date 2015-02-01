@@ -1,4 +1,4 @@
-Copyright 2014 - The MoKee OpenSource Project
+Copyright 2014 - The CyanogenMod Project
 
 Device configuration for HTC Desire 816("a5")
 =============================================
