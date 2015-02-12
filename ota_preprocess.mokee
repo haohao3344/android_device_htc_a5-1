@@ -20,6 +20,7 @@ FILES="bin/rild lib/libril.so blobs/gsm/lib blobs/gsm/bin/rild app/NfcNci lib/li
 
 for i in $FILES;do
 	if [ -e z2/system/$i ];then
+		mkdirp `dirname out/system/$i` 2> /dev/null
 		cp -R z2/system/$i out/system/$i
 		rm -r z2/system/$i
 	fi
