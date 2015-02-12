@@ -35,14 +35,6 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     ueventd.qcom.rc
 
-# Recovery
-PRODUCT_PACKAGES += \
-    lpm.rc \
-    choice_fn \
-    offmode_charging \
-    offmode_charging_res_images \
-    offmode_charging_warn_res_images
-
 # Qcom init scripts for /etc
 PRODUCT_PACKAGES += \
    init.qcom.bt.bluedroid.sh \
@@ -84,6 +76,7 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
+    libqcomvoiceprocessing \
     tinymix
 
 # Audio configuration
