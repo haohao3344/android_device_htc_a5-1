@@ -31,4 +31,7 @@ fi
 basedir="/system/blobs/$variant/"
 cd $basedir
 chmod 755 bin/*
+if [ -f bin/rild ]; then
+	chown 0.2000 bin/rild
+fi
 find . -type f | while read file; do rm -f /system/$file; ln -s $basedir$file /system/$file; done
