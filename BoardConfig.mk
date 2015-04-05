@@ -48,7 +48,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x02008000 --tags_offset 0x01e00000
 BOARD_CUSTOM_BOOTIMG_MK := device/htc/a5/mkbootimg.mk
-TARGET_KERNEL_CONFIG := cm_a5_defconfig
+TARGET_KERNEL_CONFIG := mokee_a5_defconfig
 TARGET_KERNEL_SOURCE := kernel/htc/msm8974
 
 # QCOM hardware
@@ -184,7 +184,7 @@ ENABLE_WEBGL := true
 TARGET_FORCE_CPU_UPLOAD := true
 
 # Hardware
-BOARD_HARDWARE_CLASS := device/htc/a5/cmhw
+BOARD_HARDWARE_CLASS := device/htc/a5/mkhw
 
 # inherit from the proprietary version
 -include vendor/htc/a5/BoardConfigVendor.mk
