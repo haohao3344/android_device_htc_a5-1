@@ -125,6 +125,8 @@ on fs
     setprop ro.crypto.fuse_sdcard true
 
 on post-fs-data
+    symlink /sys/kernel/debug /data/d
+
     mkdir /data/tombstones 0771 system system
     symlink /data/tombstones /tombstones
     mkdir /tombstones/modem 0771 system system
@@ -527,24 +529,20 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service ril-daemon1 /system/bin/rild -c 1
+service ril-daemon2 /system/bin/rild -c 2
     class main
-    socket rild1 stream 660 root radio
-    socket rild-debug1 stream 660 radio system
+    socket rild2 stream 660 root radio
+    socket rild-debug2 stream 660 radio system
     user root
+    group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
     disabled
-    group radio cache inet misc audio sdcard_r sdcard_rw qcom_oncrpc diag qcom_diag log
 
 # Properties start here
 on property:persist.radio.multisim.config=dsds
-    symlink rild1 /dev/socket/rild2
-    symlink rild-debug1 /dev/socket/rild-debug2
-    start ril-daemon1
+    start ril-daemon2
 
 on property:persist.radio.multisim.config=dsda
-    symlink rild1 /dev/socket/rild2
-    symlink rild-debug1 /dev/socket/rild-debug2
-    start ril-daemon1
+    start ril-daemon2
 
 on property:bluetooth.hciattach=true
     start hciattach
@@ -621,7 +619,6 @@ on property:service.bootanim.exit=1
     chmod 664 /sys/devices/system/cpu/cpu1/online
     chmod 664 /sys/devices/system/cpu/cpu2/online
     chmod 664 /sys/devices/system/cpu/cpu3/online
-    write /dev/cpuctl/apps/cpu.notify_on_migrate "1"
 
     write /sys/module/cpu_boost/parameters/sync_threshold "1728000"
     write /sys/module/cpu_boost/parameters/input_boost_freq "1497600"
@@ -639,14 +636,13 @@ on property:init.svc.bootanim=running
     write /sys/block/mmcblk0/queue/scheduler noop
 
 on property:init.svc.bootanim=stopped
-    # Switch to ROW and balanced mode after boot for better UX
+    # Switch to fipos and balanced mode after boot for better UX
     setprop sys.perf.profile 1
-    write /sys/block/mmcblk0/queue/scheduler row
+    write /sys/block/mmcblk0/queue/scheduler fiops
 
 # MK Performance Profiles
 on property:sys.perf.profile=0
     stop mpdecision
-    stop thermal-engine
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -657,11 +653,9 @@ on property:sys.perf.profile=0
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "ondemand"
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor "msm-adreno-tz"
     start mpdecision
-    start thermal-engine
 
 on property:sys.perf.profile=1
     stop mpdecision
-    stop thermal-engine
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -682,11 +676,9 @@ on property:sys.perf.profile=1
     write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold_any_cpu_load 80
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor "msm-adreno-tz"
     start mpdecision
-    start thermal-engine
 
 on property:sys.perf.profile=2
     stop mpdecision
-    stop thermal-engine
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
@@ -696,4 +688,3 @@ on property:sys.perf.profile=2
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "performance"
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "performance"
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor "performance"
-    start thermal-engine

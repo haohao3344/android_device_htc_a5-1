@@ -25,7 +25,7 @@ TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 
 # Device uses high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
+PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Ramdisk
@@ -69,6 +69,7 @@ PRODUCT_COPY_FILES += \
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
+    audio_amplifier.msm8226 \
     audio_policy.msm8226 \
     audio.primary.msm8226 \
     audio.r_submix.default \
@@ -194,7 +195,7 @@ PRODUCT_PACKAGES += \
 
 # Variant linking script
 PRODUCT_COPY_FILES += \
-    device/htc/a5/releasetools/makelinks.sh:install/bin/makelinks.sh
+    device/htc/a5/releasetools/variant_script.sh:install/bin/variant_script.sh
 
 # Wifi firmware
 PRODUCT_PACKAGES += \
