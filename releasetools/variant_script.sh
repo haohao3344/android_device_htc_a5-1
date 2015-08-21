@@ -22,4 +22,4 @@ fi
 basedir="/system/blobs/$variant/"
 cd $basedir
 chmod 755 bin/*
-find . -type f | while read file; do ln -s $basedir$file /system/$file ; done
+find . -type f | while read file; do rm -f /system/$file; ln -s $basedir$file /system/$file ; done

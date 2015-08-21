@@ -16,4 +16,4 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-echo "assert(run_program(\"/system/bin/makelinks.sh\") == 0);" >> updater-script
+echo "assert(run_program(\"/system/bin/variant_script.sh\") == 0);" >> updater-script
