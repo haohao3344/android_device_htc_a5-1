@@ -16,4 +16,6 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-echo "assert(run_program(\"/system/bin/variant_script.sh\") == 0);" >> updater-script
+echo "package_extract_file(\"variant_script.sh\", \"/tmp/variant_script.sh\");" >> updater-script
+echo "assert(run_program(\"/tmp/variant_script.sh\") == 0);" >> updater-script
+echo "delete(\"/tmp/variant_script.sh\");" >> updater-script
