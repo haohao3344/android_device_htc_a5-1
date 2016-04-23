@@ -31,4 +31,3 @@
 
 /sys/devices/platform/kcal_ctrl.0(/.*)?		u:object_r:kcal_dev:s0
 /sys/bus/platform/drivers/kcal_ctrl(/.*)?	u:object_r:kcal_dev:s0
-/sys/devices/virtual/timed_output/vibrator/pwm_value_1p u:object_r:vibe_dev:s0
